@@ -46,7 +46,7 @@ export const SelectCardDialog: React.FC<SelectCardDialogProps> = ({ cardsData, o
             </TabList>
           </DialogContent>
           <DialogActions>            
-            <Button type="submit" appearance="primary">Do Something</Button>
+            <Button type="submit" appearance="primary">Select card</Button>
           </DialogActions>
         </DialogBody>
       </form>
