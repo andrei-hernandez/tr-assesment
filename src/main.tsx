@@ -7,11 +7,11 @@ import { BrowserRouter } from 'react-router-dom'
 import { CardProvider } from './context/cardContext.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <CardProvider>
-        <App />
-      </CardProvider>
-    </BrowserRouter>
+  <React.StrictMode>    
+      <BrowserRouter>
+        <CardProvider>
+          <App />
+        </CardProvider>
+      </BrowserRouter>    
   </React.StrictMode>,
 )

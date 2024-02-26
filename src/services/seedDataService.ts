@@ -35,7 +35,7 @@ export const seedDataService = (): void => {
       },
       {
         id: "5",
-        cardNumber: "2345678901234567",
+        cardNumber: "5678901234567890",
         pin: "2345",
         ownerName: "Peter Parker",
         cardType: "PLUS",
@@ -43,7 +43,7 @@ export const seedDataService = (): void => {
       },
       {
         id: "6",
-        cardNumber: "2345678901234567",
+        cardNumber: "8901234567890123",
         pin: "2345",
         ownerName: "Peter Parker",
         cardType: "VISA",

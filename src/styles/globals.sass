@@ -14,6 +14,7 @@
   display: flex
   flex-direction: row
   justify-content: space-between
+  margin: 0
 
 .atm-sign
   display: flex
@@ -29,7 +30,7 @@
   z-index: 1
   border: 8px solid #E7E7DC
   background: #7EB4D5
-  margin-top: 4rem
+  margin-top: 1rem
   width: 280px
   height: 280px
 
@@ -120,9 +121,54 @@
 .atm-custom-amount-body
   .atm-custom-amount-input
     margin: 1rem
-    background: transparent    
+    background: transparent
   ::placeholder
     color: #FFFFFF
+
+.atm-header
+  margin-top: 0.80rem
+  height: 1.20rem
+  width: 237px
+  display: flex
+  margin-inline: auto
+  flex-direction: row
+  justify-content: space-between
+  .atm-cards-banner
+    z-index: 0
+    position: absolute
+    left: 50%
+    margin-left: -118px
+  .atm-card-element
+    width: 3.1rem
+    z-index: 1
+    background: #F1F0E7
+    opacity: 0.8
+  .active
+    opacity: 0
+
+.atm-select-card-button
+  margin-top: 3rem
+  padding: 0.5rem
+
+.atm-systems-logo
+  margin-top: 5px
+  display: flex
+  flex-direction: columns
+  justify-content: end
+  margin-right: 4.77rem
+
+.atm-sign-grafiti
+  z-index: 1
+  position: absolute
+  left: 50%
+
+.atm-sticker-graffiti
+  img
+    z-index: 1
+    position: absolute
+    left: 39%
+    top: 70%
+    margin-left: -1.5rem
 
 @import './screenViews/initialView.sass'
 @import './screenViews/accountDetails.sass'

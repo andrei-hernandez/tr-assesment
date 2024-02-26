@@ -26,11 +26,16 @@ const deposit = (cardNumber: string, amount: number) => {
   }
 }
 
+const getAllAccounts = (): Array<Card> => {
+  return JSON.parse(localStorage.getItem("accounts")!)
+}
+
 export const accountsService = () => {
   return {
     authenticateCard,
     withdraw,
     deposit,
+    getAllAccounts,
     getAccount: () => { },
   }
 }

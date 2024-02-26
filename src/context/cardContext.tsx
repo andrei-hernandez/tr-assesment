@@ -9,6 +9,7 @@ export interface CardContextType {
   heldBalance?: HeldBalance,
   onConfirmWithdraw: () => void
   onConfirmDeposit: () => void
+  getAllAccounts: () => Array<Card>
   exit: () => void
 }
 
@@ -23,7 +24,11 @@ export const CardProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [card, setCard] = useState<Card>(null!)
   const [heldBalance, setHeldBalance] = useState<HeldBalance>(null!)
 
-  const authenticateCard = (cardNumber: string, pin: string) => {
+  const getAllAccounts = (): Array<Card> => {
+    return accountsService().getAllAccounts()
+  }
+
+  const authenticateCard = (cardNumber: string, pin: string) => {    
     const card = accountsService().authenticateCard(cardNumber, pin)
     if (!card) return alert("Card not found")
     return setCard(card)
@@ -59,6 +64,7 @@ export const CardProvider: React.FC<{ children: React.ReactNode }> = ({ children
       authenticateCard,
       onConfirmWithdraw,
       onConfirmDeposit,
+      getAllAccounts,
       exit,
     }), [card, heldBalance, onConfirmWithdraw, onConfirmDeposit])
 

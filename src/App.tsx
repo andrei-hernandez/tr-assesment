@@ -2,11 +2,17 @@ import { useContext, useEffect, useState } from 'react'
 import atmSign from './assets/atm_sign.png'
 import './App.css'
 import { AtmButton } from './components/atmButton'
-import { OnHoldBalanceTypes, ScreenViews } from './types'
+import { Card, OnHoldBalanceTypes, ScreenViews } from './types'
 import { Screen } from './components/screen'
 import { seedDataService, validateData } from './services/seedDataService'
 import { useNavigate } from 'react-router-dom'
 import { CardContext } from './context/cardContext'
+import cardsBanner from './assets/creditcard_sprite.png'
+import { Dialog, FluentProvider, webLightTheme } from '@fluentui/react-components'
+import { SelectCardDialog } from './components/cardSelectorDialog'
+import systems from "./assets/systems.png"
+import graffiti from "./assets/graffiti.png"
+import stickerGraffiti from "./assets/sticker_graf.png"
 
 export default function App() {
   useEffect(() => {
@@ -17,8 +23,8 @@ export default function App() {
   const navigate = useNavigate()
   const [currentView, setCurrentView] = useState<ScreenViews>(ScreenViews.initial)
   const [pin, setPin] = useState<string>("")// Re-render the entire page when the pin is updated
-
-  const selectedCard = "1234567890123456"
+  const [selectedCard, setSelectedCard] = useState<Card>(null!)
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
 
   interface Actions {
     [key: number]: {
@@ -91,7 +97,7 @@ export default function App() {
     },
     8: {
       [ScreenViews.initial]: () => {
-        card.authenticateCard(selectedCard, pin)
+        card.authenticateCard(selectedCard.cardNumber, pin)
         setCurrentView(ScreenViews.accountDetails)
         navigate('/account-details')
         alert('Authenticated')
@@ -114,7 +120,7 @@ export default function App() {
       },
       [ScreenViews.depositConfirm]: () => {
         alert('Insert your money please')
-        setTimeout(() => {        
+        setTimeout(() => {
           card.onConfirmDeposit()
           alert('Deposit successful')
           navigate('/account-details')
@@ -151,12 +157,44 @@ export default function App() {
     setPin(pin)
   }
 
+  const onSelectCard = (card: Card) => {
+    setSelectedCard(card)
+    setIsDialogOpen(false)
+  }
+
+  useEffect(() => {
+    if (!selectedCard) {
+      setIsDialogOpen(true)
+    }
+  }, [selectedCard])
+
   return (
     <div className="container">
+      <FluentProvider theme={webLightTheme}>
+        <Dialog open={isDialogOpen}
+          onOpenChange={(_, data) => {
+            if (data.type === "backdropClick") return
+            if (data.type === "escapeKeyDown") return
+            setIsDialogOpen(data.open)
+          }}
+        >
+          <SelectCardDialog cardsData={card.getAllAccounts()} onSubmit={onSelectCard} />
+        </Dialog>
+      </FluentProvider>
       <div className="atm-sign">
+        <img alt="grafiti" className="atm-sign-grafiti" src={graffiti}/>
         <img src={atmSign} alt="atm-sign" className='atm-sign' />
       </div>
       <div className="atm-body">
+        <div className='atm-header'>
+          <img src={cardsBanner} alt="cards-banner" className='atm-cards-banner' />
+          <div className={`atm-card-element ${selectedCard?.cardType === "STAR" && "active"}`} />
+          <div className={`atm-card-element ${selectedCard?.cardType === "PULSE" && "active"}`} />
+          <div className={`atm-card-element ${selectedCard?.cardType === "MAESTRO" && "active"}`} />
+          <div className={`atm-card-element ${selectedCard?.cardType === "MASTERCARD" && "active"}`} />
+          <div className={`atm-card-element ${selectedCard?.cardType === "PLUS" && "active"}`} />
+          <div className={`atm-card-element ${selectedCard?.cardType === "VISA" && "active"}`} />
+        </div>
         <div className="atm-user-interface">
           <div className="atm-button-list-left">
             <AtmButton title="1" type="button" className="atm-button" isRight={false} />
@@ -178,6 +216,19 @@ export default function App() {
             <AtmButton title="8" type="button" className="atm-button" isRight={true} onClick={() => actions[8][currentView]()} />
           </div>
         </div>
+        <div className="atm-systems-logo">
+          <img alt='systems' src={systems} />
+        </div>
+        <div className='atm-sticker-graffiti'>
+          <img alt="grafiti" src={stickerGraffiti}/>
+        </div>
+        <button
+          className="atm-select-card-button"
+          type='button'
+          onClick={() => {
+            setSelectedCard(null!)
+            setIsDialogOpen(true)
+          }}>Select another card</button>
       </div>
     </div>
   )
