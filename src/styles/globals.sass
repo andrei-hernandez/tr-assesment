@@ -1,0 +1,128 @@
+.container
+  display: flex
+  flex-direction: column
+  align-items: center
+  height: calc(100vh - 2rem)
+
+.atm-body
+  background: #F1F0E7
+  width: 430px
+  height: 100%
+
+.atm-user-interface
+  width: 100%
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+
+.atm-sign
+  display: flex
+  flex-direction: row
+  align-items: center
+  background: #126CAE
+  padding: 18px 40px
+  border-radius: 14px
+  height: 130px
+
+.atm-screen
+  font-family: "Kode Mono", monospace
+  z-index: 1
+  border: 8px solid #E7E7DC
+  background: #7EB4D5
+  margin-top: 4rem
+  width: 280px
+  height: 280px
+
+.atm-button-list-right
+  display: flex
+  flex-direction: column
+  justify-content: end
+  padding-right: 13px
+  row-gap: 12px
+  margin-bottom: 20px
+
+.atm-button-list-left
+  display: flex
+  flex-direction: column
+  justify-content: end
+  padding-left: 13px
+  row-gap: 12px
+  margin-bottom: 20px
+
+.atm-button-container
+  display: flex
+  flex-direction: row
+  justify-content: start
+  align-items: center
+  .atm-button-decoration
+    z-index: 3
+    position: relative
+    width: 14px
+    height: 3px
+    float: left
+    background: #ABABA9
+  .atm-button
+    z-index: 2
+    height: 25px
+    width: 40px
+    background: #C1C1C1
+    border-top: 2px solid #D4D4CF
+    border-bottom: 2px solid #B0B0B0
+    border-radius: 5px
+    border-left: none
+    border-right: none
+  .atm-button:hover
+    background: #A1A1A1
+
+.atm-option-container
+  display: flex
+  flex-direction: row
+  justify-content: start
+  align-items: center
+  .atm-option-text
+    margin-inline: 4px
+  .atm-option-decoration
+    z-index: 3
+    position: relative
+    width: 14px
+    height: 3px
+    vertical-align: middle
+    background: #FFFFFF
+
+.atm-owner-name-text
+  display: flex
+  flex-direction: column
+  justify-content: center
+  margin-top: 2.40rem
+
+.atm-actions-left, .atm-actions-right
+  display: flex
+  flex-direction: column
+  row-gap: 13px
+.atm-actions-left
+  align-items: flex-start
+.atm-actions-right
+  align-items: flex-end
+
+.atm-actions
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: flex-end
+  margin-bottom: 0.78rem
+
+.atm-screen-details-container
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+.atm-custom-amount-body
+  .atm-custom-amount-input
+    margin: 1rem
+    background: transparent    
+  ::placeholder
+    color: #FFFFFF
+
+@import './screenViews/initialView.sass'
+@import './screenViews/accountDetails.sass'
